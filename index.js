@@ -4,7 +4,8 @@ const port=8000;
 
 //use express router
  app.use('/',require('./routes/route'));
-// const router=require('./routes/route'); we cannot do this bcz we need to use it also
+// const router=require('./routes/route'); we cannot do this bcz we need to use it by app also
+
 
 
 

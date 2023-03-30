@@ -3,7 +3,8 @@ const router=express.Router();
 console.log('router loaded');
 
 
-const controller=require('../controller/home_controller');
+const homecontroller=require('../controller/home_controller');
 
-router.get('/',controller.home);
+router.get('/',homecontroller.home);
+router.use('/user',require('./user'));
 module.exports=router;
