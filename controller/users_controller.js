@@ -21,8 +21,35 @@ module.exports.signIn=function(req,res){
 
 //get the signUp data
 module.exports.create=function(req,res){
-    //TODO Later
-}
+    //first check the password
+    if(req.body.password!=req.body.confirm_password){
+        return res.redirect('back');
+    }
+    User.findOne({email:req.body.email},function(err,user){
+        if(err){
+            console.log("error in finding the user in signup",err);
+        }
+        //user not found or not previously created
+        if(!user){
+            User.create(req.body,function(err,user){
+                if(err){
+                    console.log("error in creating user",err);
+                    return;
+                }
+                //user created then
+                else{
+                    return res.redirect('/user/sign-in');
+                }
+                    
+            });
+        }
+        //if user is already present
+        else{
+             return res.redirect('back');
+        }
+  });
+    
+        }
 
 //signIn and create the session for the user
 module.exports.createSession=function(req,res){
