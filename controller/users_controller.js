@@ -1,3 +1,4 @@
+const User=require('../schema/user_schema');
 //render the user profile page
 module.exports.profile=function(req,res){
     return res.render('user_profile',{
@@ -49,9 +50,9 @@ module.exports.create=function(req,res){
         }
   });
     
-        }
+     }
 
 //signIn and create the session for the user
 module.exports.createSession=function(req,res){
-    //TODO later
+    return res.redirect('/');
 }
