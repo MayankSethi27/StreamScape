@@ -5,7 +5,7 @@ const passport=require('passport');
 const userscontroller=require('../controller/users_controller');
 
 //to render profile page
-router.get('/profile',userscontroller.profile);
+router.get('/profile',passport.checkAuthentication,userscontroller.profile);
 
 //to render signup page
 router.get('/sign-up',userscontroller.signUp);

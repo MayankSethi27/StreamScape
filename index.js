@@ -24,13 +24,15 @@ app.set('layout extractScripts',true);
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
-//we need take a middleware which takes cockie and encrypts it
+//we need take a express-session middleware which takes cockie and encrypts it and store in it
 app.use(session({
      //name of cookie
     name:'codeial',
     //key to encrypt the id
     secret:'blahsomething',
+    //it is used for when user has not logIn(session not initialize) so there is no requirement to put extra info a cookie ,so we set it to false
     saveUninitialized:false,
+    //when idendity is stabilish or some user info(session data) is stabilish ,do i want to rewrite it when there is no update.so we set it to false
     resave:false,
     cookie:{
         //age of cookie
@@ -41,7 +43,7 @@ app.use(session({
 app.use(passport.initialize());
 //we need to tell the app to use passport to mantain sessions
 app.use(passport.session())
-
+app.use(passport.setAuthenticatedUser);
 //use express router
 app.use('/',require('./routes/route'));
 // const router=require('./routes/route'); we cannot do this bcz we need to use it by app -also

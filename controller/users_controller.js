@@ -8,16 +8,31 @@ module.exports.profile=function(req,res){
 
 //render the SignUp page
 module.exports.signUp=function(req,res){
-    return res.render('user_signUp',{
-        title:'user_signUp'
-    });
+    //if user is authenticated(means signed in) then canot ascess signup page and redirect to profile page
+    if(req.isAuthenticated()){
+        return res.redirect('/user/profile');
+    }
+    else{
+        return res.render('user_signUp',{
+            title:'user_signUp'
+        }
+        );
+    }
+   
 }
 
 //render the signInpage
 module.exports.signIn=function(req,res){
-    return res.render('user_signIn',{
-        title:'user_signIn'
-    });
+    //if user is authenticated(means signed in) then canot ascess signIn page and redirect to profile page
+    if(req.isAuthenticated()){
+        return res.redirect('/user/profile');
+    }
+    else{
+        return res.render('user_signIn',{
+            title:'user_signIn'
+        });
+    }
+   
 }
 
 //get the signUp data
@@ -54,5 +69,6 @@ module.exports.create=function(req,res){
 
 //signIn and create the session for the user
 module.exports.createSession=function(req,res){
+    //directly redirect to home page when logIn
     return res.redirect('/');
 }
