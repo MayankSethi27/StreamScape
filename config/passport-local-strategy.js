@@ -64,12 +64,12 @@ passport.checkAuthentication=function(req,res,next){
         return res.redirect('/user/sign-in');
     }
 }
- 
+ //this function is automatically called when we signed In 
 passport.setAuthenticatedUser=function(req,res,next){
     if(req.isAuthenticated()){
         //req.user contains the current signIn userfrom the session-cookie and we are just sending this to locals for the views
         res.locals.user=req.user;
-        
+        //localuser and user are same just to use it in ejs file we pass the req.user
     }
     next();
 }

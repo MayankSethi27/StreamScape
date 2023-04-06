@@ -9,6 +9,8 @@ const cookieParser = require('cookie-parser')
 const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
+//require mongoStore and argument as session as we want to store session-cookie to the db
+const MongoStore=require('connect-mongo');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
@@ -25,6 +27,7 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
 //we need take a express-session middleware which takes cockie and encrypts it and store in it
+//MongoStore is used to setup the cookie in the db
 app.use(session({
      //name of cookie
     name:'codeial',
@@ -37,12 +40,23 @@ app.use(session({
     cookie:{
         //age of cookie
         maxAge:(1000*60*100)
-    }
+    },
+    store: MongoStore.create({
+        //session to intract with mongoose
+        mongoUrl: 'mongodb+srv://mayank:mayank27@cluster0.yx0w0d3.mongodb.net/?retryWrites=true&w=majority',
+        // mongooseConnection:db,
+        //do i want to remove automatically is disabled
+        autoRemove:'disable'
+    },
+    function(err){
+        console.log(err || 'connect-mongoose setup OK');
+    })
 }));
 //we need to tell the app to use passport
 app.use(passport.initialize());
 //we need to tell the app to use passport to mantain sessions
 app.use(passport.session())
+//calling setAuthenticatedUser function
 app.use(passport.setAuthenticatedUser);
 //use express router
 app.use('/',require('./routes/route'));

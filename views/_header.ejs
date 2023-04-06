@@ -1,3 +1,17 @@
 <header>
     header page
+    <ul>
+        <!-- if user is signed IN(or authenticated) -->
+        <!-- locals.user is from setAuthenticated function -->
+        <% if(locals.user){%>
+            <li><a href="/user/profile"><%=user.Name%></a></li>
+            <li><a href="/user/sign-out">Sign Out</a></li>
+            <!-- if user is signed Out -->
+            <%}else{%>
+              <li>
+                <a href="/user/sign-in">Sign In</a>
+              </li>
+              <li><a href="/user/sign-up">Sign Up</a></li>
+           <% }%>
+    </ul>
 </header>

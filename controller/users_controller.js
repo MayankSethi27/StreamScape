@@ -72,3 +72,15 @@ module.exports.createSession=function(req,res){
     //directly redirect to home page when logIn
     return res.redirect('/');
 }
+
+module.exports.destroySession=function(req,res){
+    req.logout(function(err){
+        if(err){
+            return next(err);
+        }
+        else{
+            return res.redirect('/');
+        }
+    });
+    
+}
