@@ -1,0 +1,18 @@
+#layout-footer{
+    color: white;
+    background: grey;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+
+}
+.home-link{
+    color: white;
+    text-decoration: none;
+}
+.home-link:hover{
+    color: black;
+}
+.footer-nav ul{
+    list-style: none;
+}

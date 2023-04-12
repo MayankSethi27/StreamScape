@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="/css/layout.css">
     <%- style %>
     <body>
+        <!-- header is fixed  -->
         <%- include('_header');%>
        
+        <!-- body is variable and will extracted from different ejs part -->
+        <main id="layout-main">
         <%-body %>
-
+    </main>
+<!-- footer is fixed -->
         <%-include('_footer');%>
 
 

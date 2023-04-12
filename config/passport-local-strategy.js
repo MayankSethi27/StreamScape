@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../schema/user_schema');
 
 
-// authentication using passport
+// authentication using passport when we are doing logIn
 passport.use(new LocalStrategy({
         usernameField: 'email'
     },
@@ -40,7 +40,7 @@ passport.serializeUser(function(user, done){
 
 
 
-// deserializing the user from the key in the cookies
+// this function is picking id from the session-cookie and converting it into user in the database
 passport.deserializeUser(function(id, done){
     User.findById(id, function(err, user){
         if(err){
@@ -52,7 +52,7 @@ passport.deserializeUser(function(id, done){
     });
 });
 
-//check if user is authenticated(using this function as middleware)
+//check if user is authenticated(using this function as middleware)and it is passedOn to routes
 passport.checkAuthentication=function(req,res,next){
     //if user is signIn, then pass on the req to the next function(controller's action)
     //isAuthenticated is inbuilt function

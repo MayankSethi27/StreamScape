@@ -12,9 +12,10 @@ const passportLocal=require('./config/passport-local-strategy');
 //require mongoStore and argument as session as we want to store session-cookie to the db
 const MongoStore=require('connect-mongo');
 
+
 app.use(express.urlencoded());
 app.use(cookieParser());
-app.use(express.static('./assets'));
+app.use(express.static(path.join(__dirname, 'assets')));
 app.use(expressLayouts);
 
 //extract styles and scripts from the subpages into the layout head tag
@@ -41,6 +42,8 @@ app.use(session({
         //age of cookie
         maxAge:(1000*60*100)
     },
+    //mongoStore is used to store user data(session info)in the mongo database even when session restarts till signOut or cookieAGE
+    //so that we do not need to logIn again when server restarts
     store: MongoStore.create({
         //session to intract with mongoose
         mongoUrl: 'mongodb+srv://mayank:mayank27@cluster0.yx0w0d3.mongodb.net/?retryWrites=true&w=majority',
