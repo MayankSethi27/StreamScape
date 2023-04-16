@@ -17,8 +17,15 @@ module.exports.home=function(req,res){
     // });
 
 //finding posts from the 'Post' schema(model)
-//in the 'user' it contains only the id but by 'populate('user)' function we are fetching the user object of that id which contain whole details of user
-    Post.find({}).populate('user').exec(function(err,posts){
+//in the 'user' of 'PostSchema' it contains only the id but by 'populate('user)' function we are fetching the user object of that id which contain whole details of user
+    Post.find({}).populate('user')
+    .populate({
+        path:'comments',
+        populate:{
+            path:'user'
+        }
+    })
+    .exec(function(err,posts){
         if(err){
             console.log('Error in fetching the post',err);
             return;

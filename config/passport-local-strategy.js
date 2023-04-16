@@ -70,6 +70,7 @@ passport.setAuthenticatedUser=function(req,res,next){
         //req.user contains the current signIn userfrom the session-cookie and we are just sending this to locals for the views
         res.locals.user=req.user;
         //localuser and user are same just to use it in ejs file we pass the req.user
+        //user 'u' is small as we fetch the User in user in above functions 
     }
     next();
 }
