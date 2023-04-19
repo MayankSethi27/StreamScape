@@ -1,4 +1,5 @@
 const Post=require('../schema/post_schema');
+const User=require('../schema/user_schema');
 
 module.exports.home=function(req,res){
     //function to display the posts on home page
@@ -31,11 +32,15 @@ module.exports.home=function(req,res){
             return;
         }
         else{
-            console.log('Posts Fetched Sucessfully');
-            return res.render('home',{
-                title:"Codeial || home",
-                post:posts
-            });
+            User.find({},function(err,users){
+                console.log('Posts Fetched Sucessfully');
+                return res.render('home',{
+                    title:"Codeial || home",
+                    post:posts,
+                    all_users:users
+                });
+            })
+            
         }
     });
 }

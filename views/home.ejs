@@ -1,72 +1,87 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<h1>Codeial/<%=title%></h1>
+<link rel="stylesheet" href="/css/home.css">
 
-<section id="feed-posts">
-    <h4>Posts</h4>
-    <%if(locals.user){%>
-    <form action="/posts/create" id="new-post-form" method="post">
-        <textarea name="content" cols="30" rows="3" placeholder="Type Here...." required></textarea>
-        <input type="submit" value="Post">
-    </form>
-    <%}%>
-    <div id="post-list-container">
-        <ul>
-        <%for(let i of post){%>
-            
-                <li>
-                 <p>
-                   
-                    <% if(locals.user && i.user.id==locals.user.id){%>
-                        <small>
-                            <!-- <a href="/post/destroy/<%=i.id%>"></a> -->
-                            <a href="/posts/destroy/<%= i.id %>">Delete</a>
-                        </small>
-                        <%}%>
-                        <!-- <i class='fas fa-trash-alt'></i> -->
-                    <%=i.content%>
-                <br>  
-                 <small>
-                    <%=i.user.Name%>
-                </small>
-            </p>
-            <div class="post-comments">
-                <%if(locals.user){%>
-                <form action="/comments/create" method="post">
-                    <input type="text" name="content" placeholder="Type Here to add comment......" required>
-                    <!-- value attribute -> the content in the value set is sent to the server on form submission.-->
-                    <!--value="<%=i._id%> is the id of post in which comment is created-->
-                    <input type="hidden" name="post" value="<%=i._id%>">
-                    <input type="submit" value="Add Comment">
-                </form>
-                <%}%>
-
-                <div class="post-comments-lists">
-                    <ul id="post-comments<%=i._id%>">
-                        <!-- i.comments is loop inside comments of posts -->
-                        <%for(let p of i.comments){%>
-                            <p>
-                                
-                                <% if(locals.user && p.user.id==locals.user.id){%>
-                                    <small>
-                                        <!-- <a href="/post/destroy/<%=i.id%>"></a> -->
-                                        <a href="/comments/destroy/<%= p.id %>">Delete</a>
-                                    </small>
-                                    <%}%>
-                                <%=p.content%>
-                                <br>
-                                <small>
-                                    <%=p.user.Name%>
-                                </small>
-                            </p>
-                        <%}%>
-
-                    </ul>
-                </div>
-            </div>
-            </li>
-                    
+<div id="home-container">
+    <section id="feed-posts">
+        <h4>Posts</h4>
+        <%if(locals.user){%>
+        <form action="/posts/create" id="new-post-form" method="post">
+            <textarea name="content" cols="30" rows="3" placeholder="Type Here...." required></textarea>
+            <input type="submit" value="Post">
+        </form>
         <%}%>
-    </ul>
-    </div>
-</section>
+        <div id="post-list-container">
+            <ul>
+            <%for(let i of post){%>
+                
+                <li>
+                    <p>
+                      
+                       <% if(locals.user && i.user.id==locals.user.id){%>
+                           <small>
+                               <!-- <a href="/post/destroy/<%=i.id%>"></a> -->
+                               <a href="/posts/destroy/<%= i.id %>">Delete</a>
+                           </small>
+                           <%}%>
+                           <!-- <i class='fas fa-trash-alt'></i> -->
+                       <%=i.content%>
+                   <br>  
+                    <small>
+                       <%=i.user.Name%>
+                   </small>
+                </p>
+                <div class="post-comments">
+                   <%if(locals.user){%>
+                   <form action="/comments/create" method="post">
+                       <input type="text" name="content" placeholder="Type Here to add comment......" required>
+                       <!-- value attribute -> the content in the value set is sent to the server on form submission.-->
+                       <!--value="<%=i._id%> is the id of post in which comment is created-->
+                       <input type="hidden" name="post" value="<%=i._id%>">
+                       <input type="submit" value="Add Comment">
+                   </form>
+                   <%}%>
+                
+                   <div class="post-comments-lists">
+                       <ul id="post-comments<%=i._id%>">
+                           <!-- i.comments is loop inside comments of posts -->
+                           <%for(let p of i.comments){%>
+                           
+                            <li>
+                                <p>
+                                   
+                                    <% if(locals.user && locals.user.id==p.user.id){%>
+                                        <small>
+                                            <!-- <a href="/post/destroy/<%=i.id%>"></a> -->
+                                            <a href="/comments/destroy/<%= p.id %>">Delete</a>
+                                        </small>
+                                        <%}%>
+                                    <%=p.content%>
+                                    <br>
+                                    <small>
+                                        <%=p.user.Name%>
+                                    </small>
+                                </p>
+                            </li>              
+                
+                           <%}%>
+                
+                       </ul>
+                   </div>
+                </div>
+                </li>
+                        
+            <%}%>
+        </ul>
+        </div>
+    </section>
+    
+    
+    <section id="user-friends">
+        <h4>Friends</h4>
+        <%for(u of all_users){%>
+        <p>
+            <a href="/user/profile/<%=u.id%>"><%=u.Name%></a>
+        </p>
+        <%}%>
+    </section>
+
+</div>

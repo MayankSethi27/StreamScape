@@ -5,7 +5,7 @@ const passport=require('passport');
 const userscontroller=require('../controller/users_controller');
 
 //to render profile page
-router.get('/profile',passport.checkAuthentication,userscontroller.profile);
+router.get('/profile/:id',passport.checkAuthentication,userscontroller.profile);
 
 //to render signup page
 router.get('/sign-up',userscontroller.signUp);
@@ -25,5 +25,7 @@ router.post('/create-session', passport.authenticate(
 //to log Out from session
 router.get('/sign-out',userscontroller.destroySession);
 
+//to update user profile
+router.post('/update/:id',passport.checkAuthentication,userscontroller.update);
 
 module.exports=router;

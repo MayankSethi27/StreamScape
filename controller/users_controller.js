@@ -1,9 +1,13 @@
 const User=require('../schema/user_schema');
 //render the user profile page
 module.exports.profile=function(req,res){
-    return res.render('user_profile',{
-        title:'profile'
-    });
+    User.findById(req.params.id,function(err,user){
+        return res.render('user_profile',{
+            title:' User profile',
+            profile_user:user
+        });
+    })
+   
 }
 
 //render the SignUp page
@@ -83,4 +87,24 @@ module.exports.destroySession=function(req,res){
         }
     });
     
+}
+
+
+module.exports.update=function(req,res){
+    if(req.user.id==req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            if(err){
+                console.log('error in updating profile',err);
+            }
+            else{
+                console.log('profile updated sucessfully');
+                return res.redirect('/');
+            }
+           
+        });
+        
+    }
+    else{
+        return res.status(401).send('Unauthorized');
+    }
 }
