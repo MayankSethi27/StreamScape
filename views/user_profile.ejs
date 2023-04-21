@@ -4,6 +4,7 @@
 <p><%=profile_user.Name%></p>
 <p><%=profile_user.email%></p>
 
+<!-- form to update user_profile -->
 <%if(user.id==profile_user.id){%>
     <!-- if user matches then show the form -->
     <form action="/user/update/<%=profile_user.id%>" method="post" >

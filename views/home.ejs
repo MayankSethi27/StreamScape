@@ -4,6 +4,7 @@
     <section id="feed-posts">
         <h4>Posts</h4>
         <%if(locals.user){%>
+            <!-- form to create post -->
         <form action="/posts/create" id="new-post-form" method="post">
             <textarea name="content" cols="30" rows="3" placeholder="Type Here...." required></textarea>
             <input type="submit" value="Post">
@@ -11,6 +12,7 @@
         <%}%>
         <div id="post-list-container">
             <ul>
+                <!-- i represents post object -->
             <%for(let i of post){%>
                 
                 <li>
@@ -18,11 +20,11 @@
                       
                        <% if(locals.user && i.user.id==locals.user.id){%>
                            <small>
-                               <!-- <a href="/post/destroy/<%=i.id%>"></a> -->
+                               <!-- i.id is id of that post -->
                                <a href="/posts/destroy/<%= i.id %>">Delete</a>
                            </small>
                            <%}%>
-                           <!-- <i class='fas fa-trash-alt'></i> -->
+
                        <%=i.content%>
                    <br>  
                     <small>
@@ -31,6 +33,7 @@
                 </p>
                 <div class="post-comments">
                    <%if(locals.user){%>
+                    <!-- form to create comment -->
                    <form action="/comments/create" method="post">
                        <input type="text" name="content" placeholder="Type Here to add comment......" required>
                        <!-- value attribute -> the content in the value set is sent to the server on form submission.-->
@@ -42,7 +45,7 @@
                 
                    <div class="post-comments-lists">
                        <ul id="post-comments<%=i._id%>">
-                           <!-- i.comments is loop inside comments of posts -->
+                           <!-- i.comments is loop inside comments of posts(in which p represents that object) -->
                            <%for(let p of i.comments){%>
                            
                             <li>
@@ -50,7 +53,7 @@
                                    
                                     <% if(locals.user && locals.user.id==p.user.id){%>
                                         <small>
-                                            <!-- <a href="/post/destroy/<%=i.id%>"></a> -->
+                                            <!-- p.id is id of that comment -->
                                             <a href="/comments/destroy/<%= p.id %>">Delete</a>
                                         </small>
                                         <%}%>
@@ -74,7 +77,7 @@
         </div>
     </section>
     
-    
+    <!-- displaying users friends -->
     <section id="user-friends">
         <h4>Friends</h4>
         <%for(u of all_users){%>

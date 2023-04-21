@@ -73,6 +73,7 @@ module.exports.create=function(req,res){
 
 //signIn and create the session for the user
 module.exports.createSession=function(req,res){
+    req.flash('success','Logged In Successfully');
     //directly redirect to home page when logIn
     return res.redirect('/');
 }
@@ -83,14 +84,16 @@ module.exports.destroySession=function(req,res){
             return next(err);
         }
         else{
+            req.flash('success','Logged Out Successfully');
             return res.redirect('/');
         }
     });
     
 }
 
-
+//to update user profile
 module.exports.update=function(req,res){
+    //if profile user is same as logIn user
     if(req.user.id==req.params.id){
         User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
             if(err){

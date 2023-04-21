@@ -9,7 +9,11 @@
     <body>
         <!-- header is fixed  -->
         <%- include('_header');%>
-       
+       <%if(flash.success && flash.success.length>0){%>
+    <h5>
+        <%=flash.success%>
+    </h5>
+    <%}%>
         <!-- body is variable and will extracted from different ejs part -->
         <main id="layout-main">
         <%-body %>

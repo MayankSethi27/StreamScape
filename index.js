@@ -11,7 +11,10 @@ const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
 //require mongoStore and argument as session as we want to store session-cookie to the db
 const MongoStore=require('connect-mongo');
-
+//library for flash message
+const flash=require('connect-flash');
+//require flash middleware
+const customMware=require('./config/middleware');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
@@ -55,12 +58,21 @@ app.use(session({
         console.log(err || 'connect-mongoose setup OK');
     })
 }));
+
 //we need to tell the app to use passport
 app.use(passport.initialize());
+
 //we need to tell the app to use passport to mantain sessions
-app.use(passport.session())
+app.use(passport.session());
+
+//we need both above middlewares ,otherwise passport won't be able to use the isAuthenticated() from "express-session" library
 //calling setAuthenticatedUser function
 app.use(passport.setAuthenticatedUser);
+
+//to use flash library(called it after session middleware because it uses session-cookie)
+app.use(flash());
+//using custom middleware for flash message
+app.use(customMware.Setflash);
 //use express router
 app.use('/',require('./routes/route'));
 // const router=require('./routes/route'); we cannot do this bcz we need to use it by app -also
