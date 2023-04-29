@@ -73,6 +73,7 @@ module.exports.create=function(req,res){
 
 //signIn and create the session for the user
 module.exports.createSession=function(req,res){
+    console.log('session-created');
     req.flash('success','Logged In Successfully');
     //directly redirect to home page when logIn
     return res.redirect('/');

@@ -15,13 +15,13 @@
                 <!-- i represents post object -->
             <%for(let i of post){%>
                 
-                <li>
+                <li id="post-<%=i.id%>">
                     <p>
                       
                        <% if(locals.user && i.user.id==locals.user.id){%>
                            <small>
                                <!-- i.id is id of that post -->
-                               <a href="/posts/destroy/<%= i.id %>">Delete</a>
+                               <a class="delete-post-button" href="/posts/destroy/<%= i.id %>">Delete</a>
                            </small>
                            <%}%>
 
@@ -34,7 +34,7 @@
                 <div class="post-comments">
                    <%if(locals.user){%>
                     <!-- form to create comment -->
-                   <form action="/comments/create" method="post">
+                   <form action="/comments/create" method="post" id="new-comment-form">
                        <input type="text" name="content" placeholder="Type Here to add comment......" required>
                        <!-- value attribute -> the content in the value set is sent to the server on form submission.-->
                        <!--value="<%=i._id%> is the id of post in which comment is created-->
@@ -48,16 +48,16 @@
                            <!-- i.comments is loop inside comments of posts(in which p represents that object) -->
                            <%for(let p of i.comments){%>
                            
-                            <li>
+                            <li id="comment-<%=p._id%>">
                                 <p>
                                    
                                     <% if(locals.user && locals.user.id==p.user.id){%>
                                         <small>
                                             <!-- p.id is id of that comment -->
-                                            <a href="/comments/destroy/<%= p.id %>">Delete</a>
+                                            <a href="/comments/destroy/<%= p._id %>">Delete</a>
                                         </small>
                                         <%}%>
-                                    <%=p.content%>
+                                   <small><%=p.content%></small>
                                     <br>
                                     <small>
                                         <%=p.user.Name%>
@@ -88,3 +88,5 @@
     </section>
 
 </div>
+<script src="/js/home_post.js"></script>
+<script src="/js/home_comment.js"></script>

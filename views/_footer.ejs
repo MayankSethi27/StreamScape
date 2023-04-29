@@ -12,11 +12,12 @@
                 <li >
                     <a href="/" class="home-link">Home</a>
                 </li>
-              
+              <%if(locals.user){%>
+            
                 <li>
-                    <a href="user/profile" class="home-link">Profile</a>
+                    <a href="user/profile/<%=locals.user.id%>" class="home-link">Profile</a>
                 </li>
-               
+               <%}%>
             </ul>
         </nav>
     </div>

@@ -16,7 +16,7 @@ router.get('/sign-in',userscontroller.signIn);
 //to create the user by calling create function
 router.post('/create',userscontroller.create);
 
-//to create session
+//to create session(first it will authenticate and then create-session)
 router.post('/create-session', passport.authenticate(
     'local',
     {failureRedirect:'/user/sign-in'},

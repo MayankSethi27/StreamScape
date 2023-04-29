@@ -72,7 +72,7 @@ app.use(passport.setAuthenticatedUser);
 //to use flash library(called it after session middleware because it uses session-cookie)
 app.use(flash());
 //using custom middleware for flash message
-app.use(customMware.Setflash);
+app.use(customMware.setflash);
 //use express router
 app.use('/',require('./routes/route'));
 // const router=require('./routes/route'); we cannot do this bcz we need to use it by app -also
