@@ -77,12 +77,13 @@ let deletePost=function(deleteLink){
     console.log(deleteLink);
     $(deleteLink).click(function(e){
         e.preventDefault();
-
+        
         $.ajax({
             type:'get',
             url:$(deleteLink).prop('href'),
             success:function(data){
                 console.log(data);
+                //this remove() is deleting post from ejs part
                 $(`#post-${data.data.post_id}`).remove();
             },error:function(error){
                 console.log(error.responseText);

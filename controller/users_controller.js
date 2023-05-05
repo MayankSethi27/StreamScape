@@ -1,4 +1,7 @@
 const User=require('../schema/user_schema');
+const path=require('path');
+const fs=require('fs')
+
 //render the user profile page
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
@@ -93,22 +96,67 @@ module.exports.destroySession=function(req,res){
 }
 
 //to update user profile
-module.exports.update=function(req,res){
-    //if profile user is same as logIn user
-    if(req.user.id==req.params.id){
-        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
-            if(err){
-                console.log('error in updating profile',err);
-            }
-            else{
-                console.log('profile updated sucessfully');
-                return res.redirect('/');
-            }
+module.exports.update=async function(req,res){
+    // //if profile user is same as logIn user
+    // if(req.user.id==req.params.id){
+    //     User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+    //         if(err){
+    //             console.log('error in updating profile',err);
+    //         }
+    //         else{
+    //             console.log('profile updated sucessfully');
+    //             return res.redirect('/');
+    //         }
            
-        });
+    //     });
         
+    // }
+    // else{
+    //     return res.status(401).send('Unauthorized');
+    // }
+
+    if(req.user.id==req.params.id){
+        try{
+            let user=await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if(err){
+                    console.log('*****MulterError:',err);
+                }
+                else{
+                    console.log(req.file);
+                    //updating the user_schema 'Name' and 'email' attribute 
+                    //'user' is current user whose profile is being updated
+                    user.Name=req.body.Name;
+                    user.email=req.body.email;
+                    
+                    //checking if user also uploaded file(or DP) or not
+                    if(req.file){
+                        // check if an avatar exists for the user or not! if yes, delete it!
+                        //in user.avatar checking if file path is there in database
+                        //fs.existsSync() checking if file exist in local storage(diskstorage)
+                        if( user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){
+                        // deleting the avatar
+                        //user.avatar is avatar field in user_schema containing the file path
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                        // this is saving path of the uploaded file into the avatar field in the user
+                        user.avatar = User.avatarPath + '/' + req.file.filename;
+                        }
+                    }
+                        
+                    user.save();
+                    return res.redirect('back');
+                }
+            });
+        }
+        catch(err){
+            console.log('Error',err);
+            return res.redirect('back');
+        }
+
     }
     else{
-        return res.status(401).send('Unauthorized');
-    }
+         req.flash('error',err);
+         return res.status(401).send('Unauthorized');     
+                    
+          }
 }

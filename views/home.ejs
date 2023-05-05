@@ -21,7 +21,8 @@
                        <% if(locals.user && i.user.id==locals.user.id){%>
                            <small>
                                <!-- i.id is id of that post -->
-                               <a class="delete-post-button" href="/posts/destroy/<%= i.id %>">Delete</a>
+                               <a class="delete-post-button" href="/posts/destroy/<%= i.id %>">Delete11</a>
+                               
                            </small>
                            <%}%>
 
@@ -48,16 +49,16 @@
                            <!-- i.comments is loop inside comments of posts(in which p represents that object) -->
                            <%for(let p of i.comments){%>
                            
-                            <li id="comment-<%=p._id%>">
+                            <li id="comment-<%=p.id%>">
                                 <p>
                                    
                                     <% if(locals.user && locals.user.id==p.user.id){%>
                                         <small>
                                             <!-- p.id is id of that comment -->
-                                            <a href="/comments/destroy/<%= p._id %>">Delete</a>
+                                            <a class="delete-comment-button" href="/comments/destroy/<%= p.id %>">Delete</a>
                                         </small>
                                         <%}%>
-                                   <small><%=p.content%></small>
+                                   <%=p.content%>
                                     <br>
                                     <small>
                                         <%=p.user.Name%>

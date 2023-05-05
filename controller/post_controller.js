@@ -85,6 +85,7 @@ module.exports.destroy=async function(req,res){
         
             if(post.user==req.user.id){
                 console.log('post deleted sucessfully');
+                //this post.remove() function is deleting post from database
                 post.remove();
                 //deleting comment of all that post
                let comment=await Comment.deleteMany({post:req.params.id});
