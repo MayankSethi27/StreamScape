@@ -23,10 +23,10 @@ passport.use(new LocalStrategy({
             if (!user || user.password != password){
                 console.log('Invalid Username/Password');
                 req.flash('error','Invalid Username/Password');
-                //return null error and no user
+                //return null error and no user found
                 return done(null, false);
             }
-            //(returning the user with null error )to serialize function
+            //when user found(returning the user with null error )to serialize function
             console.log('user authentication successfully');
             return done(null, user);
         });
@@ -36,7 +36,7 @@ passport.use(new LocalStrategy({
 ));
 
 
-// serializing the user to decide which key is to be kept in the cookies
+// serializing the user to decide which key is to be kept in the cookies(eg- putting user id in the cokkie from 'user' object)
 passport.serializeUser(function(user, done){
     //stores the user id in the cookie using express-session middleware
     done(null, user.id);

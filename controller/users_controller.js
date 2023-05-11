@@ -132,7 +132,8 @@ module.exports.update=async function(req,res){
                     //checking if user also uploaded file(or DP) or not
                     if(req.file){
                         // check if an avatar exists for the user or not! if yes, delete it!
-                        //in user.avatar checking if file path is there in database
+                        //in user.avatar checking if file path is exist in database
+                        //(user.avatar is field name in user_schema which reference of the file uploaded)
                         //fs.existsSync() checking if file exist in local storage(diskstorage)
                         if( user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){
                         // deleting the avatar

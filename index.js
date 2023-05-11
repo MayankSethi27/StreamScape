@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser')
 const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
+const passportJWT=require('./config/passport-jwt-strategy');
 //require mongoStore and argument as session as we want to store session-cookie to the db
 const MongoStore=require('connect-mongo');
 //library for flash message
@@ -37,7 +38,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(session({
      //name of cookie
     name:'codeial',
-    //key to encrypt the id
+    //This is the secret key used to encrypt the session identifier (cookie). 
     secret:'blahsomething',
     //it is used for when user has not logIn(session not initialize) so there is no requirement to put extra info a cookie ,so we set it to false
     saveUninitialized:false,
@@ -78,6 +79,7 @@ app.use(customMware.setflash);
 //use express router
 app.use('/',require('./routes/route'));
 // const router=require('./routes/route'); we cannot do this bcz we need to use it by app -also
+
 
 app.listen(port,function(err){
     if(err){

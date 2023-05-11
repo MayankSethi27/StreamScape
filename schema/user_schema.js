@@ -29,6 +29,7 @@ const userSchema= new mongoose.Schema({
 //multer.diskStorage() is a function which tells multer that disk storage(local storage) will be used to store the files
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
+        //'path.join()' connecting current directory with avatarpath
       cb(null, path.join(__dirname,'..',AVATAR_PATH));
     },
     filename: function (req, file, cb) {

@@ -17,8 +17,11 @@ router.get('/sign-in',userscontroller.signIn);
 router.post('/create',userscontroller.create);
 
 //to create session(first it will authenticate and then create-session) OR logIn
+//When a request reaches this middleware, it triggers the local authentication strategy
 router.post('/create-session', passport.authenticate(
+    //'local' indicates that the authentication strategy being used is the local strategy.
     'local',
+    //if authentication fails then redirect to signIn page
     {failureRedirect:'/user/sign-in'},
 ),userscontroller.createSession);
 

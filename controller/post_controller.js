@@ -9,6 +9,7 @@ module.exports.create= async function(req,res){
     
     content:req.body.content,
     user:req.user._id
+    //comments:this will be empty now but when we create commrnt we will push it from comment_controller
    });
 // check if type of request is for AJAX(which is XMLHttp request)
    if(req.xhr){
@@ -21,7 +22,7 @@ module.exports.create= async function(req,res){
      });
     
    }
-   req.flash('success','Post Published!');
+//    req.flash('success','Post Published!');
         return res.redirect('back');
 }catch(err){
     req.flash('error',err);
@@ -98,7 +99,7 @@ module.exports.destroy=async function(req,res){
                     message:"Post deleted"
                 });
                }
-               req.flash('success','Post and associated comments deleted!');
+            //    req.flash('success','Post and associated comments deleted!');
                return res.redirect('back');
             }
             else{

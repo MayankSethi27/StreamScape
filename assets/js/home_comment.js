@@ -5,7 +5,7 @@
 
         newCommentform.submit(function(e){
             e.preventDefault();
-            
+            console.log('prevented');
             $.ajax({
                 type:'post',
                 url:"/comments/create",
@@ -15,7 +15,7 @@
                 success:function(data){
                    console.log(data);
                    let newComment=newCommentDom(data.data.comment);
-                   $('.post-comments-lists>ul').prepend(newComment);
+                   $('#post-comments-lists>ul').prepend(newComment);
                    deleteComment($(' .delete-comment-button',newComment));
                  },
                   error:function(error){
@@ -60,27 +60,37 @@
 
  
 //method to delete a post from DOM
-let deleteComment = async function(deleteLink) {
-    console.log(deleteLink);
-    $(deleteLink).click(async function(e) {
-      e.preventDefault();
-  
-      try {
-        const response = await $.ajax({
-          type: 'get',
-          url: $(deleteLink).prop('href'),
-        });
-  
-        console.log(response);
-        $(`#comment-${response.data.comment_id}`).remove();
-      } catch (error) {
-        console.log(error.responseText);
-      }
-  
-    
-    });
-  };
-  
+let deleteComment=function(deleteLink){
+  console.log(deleteLink);
+  $(deleteLink).click(function(e){
+    e.preventDefault();
 
+      $.ajax({
+          type:'get',
+          url:$(deleteLink).prop('href'),
+          success:function(data){
+              console.log(data);
+              //this remove() is deleting post from ejs part
+              $(`#comment-${data.data.comment_id}`).remove();
+          },error:function(error){
+              console.log(error.responseText);
+          }
+      })
+  })
+}
+  
+let convertCommentToAjax=function(){
+
+    $('#post-comments-lists>ul').each(function(){
+
+        let self=$(this);
+        let deleteButton= $('.delete-comment-button',self);
+        deleteComment(deleteButton);
+
+        //   let commentId=self.prop('id').split("-")[1]
+        //   new newCommentDom(commentId);
+    });
+}
+convertCommentToAjax();
 createComment();
     }

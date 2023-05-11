@@ -16,6 +16,7 @@ module.exports.create=async function(req,res){
             post:req.body.post,
             user:req.user._id
         });
+        //pushing the 'comment' in comments array of post
         post.comments.push(comment);
         //to tell the database to save the post
         post.save();
@@ -32,12 +33,12 @@ module.exports.create=async function(req,res){
      
                 }
                 console.log("comment created sucessfully");
-                console.log(comment);
+                
                 //pushing comment in that post
                 //we are pushing the comment inside the 'comments' array of the the 'posts' schema
                
                 
-                req.flash('success','comment published!');
+                // req.flash('success','comment published!');
                 return res.redirect('/');
             }
        
@@ -49,9 +50,9 @@ module.exports.create=async function(req,res){
     }
 
 module.exports.destroy= async function(req,res){
-  
-   let comment=await Comment.findById(req.params.id);
-        console.log(comment.user);
+     
+   try{
+    let comment=await Comment.findById(req.params.id);
         console.log(req.user.id);
         if(comment.user==req.user.id){
             let PostId=comment.post;
@@ -61,6 +62,7 @@ module.exports.destroy= async function(req,res){
           let post= await Post.findByIdAndUpdate(PostId,{$pull:{comments:req.params.id}});
                 
             if(req.xhr){
+                
                return res.status(200).json({
                     data:{
                         comment_id:req.params.id
@@ -68,10 +70,15 @@ module.exports.destroy= async function(req,res){
                     message:"comment deleted"
                 });
             }
-            req.flash('success','comment deleted!');
+            // req.flash('success','comment deleted!');
             return res.redirect('back');
 
         }else{
-            req.flash('error',err);
+            req.flash('no comment found',err);
             return res.redirect('back');
         }}
+    catch(err){
+        console.log('error',error);
+        return;
+    }
+}

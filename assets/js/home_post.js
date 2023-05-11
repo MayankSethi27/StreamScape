@@ -1,5 +1,6 @@
 //method to submit the post form using AJAX
 {
+    //creating post::sending data
    let createPost=function(){
     let newPostform=$('#new-post-form');
 
@@ -11,8 +12,12 @@
         $.ajax({
             type:'post',
             url:"/posts/create",
+            //-->this 'data:newPostform.serialize()' contains the data we received from form
+            //( serializing means to convert the form data into JSON { key-value pair } 
             data:newPostform.serialize(),
+    
             //data is getting response of post which is created from return res.status(200).json({})....[in json format]
+            //this data is response from controller which has created post info
             success:function(data){
                let newPost=newPostDom(data.data.post);
                $('#post-list-container>ul').prepend(newPost);
@@ -92,5 +97,19 @@ let deletePost=function(deleteLink){
     })
 }
 
+let convertPostToAjax=function(){
+
+    $('#post-list-container>ul').each(function(){
+
+        let self=$(this);
+        let deleteButton= $('.delete-post-button',self);
+        deletePost(deleteButton);
+
+        //   let postId=self.prop('id').split("-")[1]
+        //   new newPostDom(postId);
+    });
+}
+
+convertPostToAjax();
 createPost();
 }
