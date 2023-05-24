@@ -46,6 +46,7 @@ module.exports.signIn=function(req,res){
 module.exports.create=function(req,res){
     //first check the password
     if(req.body.password!=req.body.confirm_password){
+        req.flash('error', 'Passwords do not match');
         return res.redirect('back');
     }
     User.findOne({email:req.body.email},function(err,user){
@@ -59,8 +60,9 @@ module.exports.create=function(req,res){
                     console.log("error in creating user",err);
                     return;
                 }
-                //user created then
+                //user created then redirecting user to signIn page
                 else{
+                   
                     return res.redirect('/user/sign-in');
                 }
                     
@@ -68,6 +70,7 @@ module.exports.create=function(req,res){
         }
         //if user is already present
         else{
+            req.flash('success', 'You have signed up, login to continue!');
              return res.redirect('back');
         }
   });
@@ -77,7 +80,7 @@ module.exports.create=function(req,res){
 //signIn and create the session for the user
 module.exports.createSession=function(req,res){
     console.log('session-created');
-    req.flash('success','Logged In Successfully');
+      req.flash('success','Logged In Successfully');
     //directly redirect to home page when logIn
     return res.redirect('/');
 }

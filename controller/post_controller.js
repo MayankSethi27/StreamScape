@@ -13,6 +13,7 @@ module.exports.create= async function(req,res){
    });
 // check if type of request is for AJAX(which is XMLHttp request)
    if(req.xhr){
+    //populating user bcz to show user name on frontend part as it contains only user_id(for AJAX part)
    await post.populate('user');
      return res.status(200).json({
         data:{

@@ -31,4 +31,11 @@ router.get('/sign-out',userscontroller.destroySession);
 //to update user profile
 router.post('/update/:id',passport.checkAuthentication,userscontroller.update);
 
+//to logIn/SignIn via google
+//scope-->it is the info which we are looking to fetch from google
+//'email' is not he part of profile so we have to take email saperately
+router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+router.get('/auth/google/callback',passport.authenticate('google',{
+    successRedirect : '/',failureRedirect:'/user/sign-in'}));
+
 module.exports=router;

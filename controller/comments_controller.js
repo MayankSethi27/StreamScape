@@ -1,5 +1,6 @@
 const Comment=require('../schema/comment_schema');
 const Post=require('../schema/post_schema');
+const CommentMailer=require("../controller/mailers/comments_mailers");
 
 module.exports.create=async function(req,res){
 
@@ -20,9 +21,14 @@ module.exports.create=async function(req,res){
         post.comments.push(comment);
         //to tell the database to save the post
         post.save();
-       await comment.populate('user');
+        
+        await comment.populate('user');
+        
+        //calling comment_mailer function to send mail when user comment
+        CommentMailer.newComment(comment);
+
            
-                // check if type of request is for AJAX(which is XMLHttp request)
+            // check if type of request is for AJAX(which is XMLHttp request)
             if(req.xhr){
                 return res.status(200).json({
                        data:{
