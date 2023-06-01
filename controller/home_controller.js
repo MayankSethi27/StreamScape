@@ -1,6 +1,7 @@
 const Post=require('../schema/post_schema');
 const User=require('../schema/user_schema');
 
+
 //this function is working when we are reloading the page(for frontend part)
 module.exports.home=async function(req,res){
 //finding posts from the 'Post' schema(model)
@@ -38,21 +39,30 @@ let posts=await Post.find({})
    .sort('-createdAt')
    //we are populating bcz post_schema contains id of user which will show id in frontend part. so to show name of the user we need to populate user which is inside post_schema
    .populate('user')
+   //this populate is for comments and their likes(of Post)
     .populate({
         path:'comments',
         populate:{
             path:'user'
+        },
+        populate:{
+            path:'likes'
         }
-    });
+    })
+    //this populate is for likes in Post object
+    .populate('likes')
+    
     console.log("post frontend part when logIN");
     let users=await  User.find({});
+
        
     //we sending the details to home.ejs file 
         return res.render('home',{
             //these are details
             title:"Codeial || home",
             post:posts,
-            all_users:users
+            all_users:users,
+            
         });
     
     }catch(err){

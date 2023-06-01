@@ -20,7 +20,7 @@ const userSchema= new mongoose.Schema({
     //this field has the reference of the 'avatars' folder in which uploaded file is store
     avatar:{
         type:String
-    }
+    },
    
 },{
     timestamps:true

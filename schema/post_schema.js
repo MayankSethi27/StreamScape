@@ -14,13 +14,17 @@ const postSchema=new mongoose.Schema({
         required:true
     },
     //fetching all the id's of all the comments in this post itself associated with this post
-    //we are storing all comments inside the post that why we take the array of comments as there are many array
+    //we are storing all comments ids inside the post, thats why we take the array of comments as there are many array
     comments:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:'Comment',
         }
-    ]
+    ],
+    likes:[{
+       type:mongoose.Schema.Types.ObjectId,
+       ref:'Like'    
+    }]
 },
 {
     timestamps:true

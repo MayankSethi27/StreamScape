@@ -1,6 +1,9 @@
 const Comment=require('../schema/comment_schema');
 const Post=require('../schema/post_schema');
 const CommentMailer=require("../controller/mailers/comments_mailers");
+const queue=require('../config/kue');
+const commentEmailWorker=require('../workers/comment_email_worker');
+const Like=require('../schema/like_schema');
 
 module.exports.create=async function(req,res){
 
@@ -25,8 +28,18 @@ module.exports.create=async function(req,res){
         await comment.populate('user');
         
         //calling comment_mailer function to send mail when user comment
-        CommentMailer.newComment(comment);
-
+        // CommentMailer.newComment(comment);
+         
+        //creating job means sending the comments to the 'email' queue
+        let job=queue.create('emails',comment).save(function(err){
+            if(err){
+                console.log('Error in sending to the queue',err);
+                return;
+            }
+            else{
+                console.log('job enqueued',job.id);
+            }
+        })
            
             // check if type of request is for AJAX(which is XMLHttp request)
             if(req.xhr){
@@ -61,7 +74,11 @@ module.exports.destroy= async function(req,res){
     let comment=await Comment.findById(req.params.id);
         console.log(req.user.id);
         if(comment.user==req.user.id){
+
             let PostId=comment.post;
+            //delete associate likes for this comment
+            await Like.deleteMany({likeable:comment,onModel:'Comment'});
+
             comment.remove();
 
             //updating post after deleting comment from it

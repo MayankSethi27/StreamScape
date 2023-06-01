@@ -1,5 +1,6 @@
 const Post=require('../schema/post_schema');
 const Comment=require('../schema/comment_schema');
+const Like=require('../schema/like_schema');
 
 //function to create post in database
 module.exports.create= async function(req,res){
@@ -83,10 +84,15 @@ module.exports.create= async function(req,res){
 module.exports.destroy=async function(req,res){
 
     try{
+        //let post contains id of that post
    let post=await Post.findById(req.params.id);
         
             if(post.user==req.user.id){
                 console.log('post deleted sucessfully');
+
+                //CHANGE::delete the associate likes of post and comments of that post
+                await Like.deleteMany({likeable:post, onModel:'Post'});
+                await Like.deleteMany({_id:{$in:post.comments}});
                 //this post.remove() function is deleting post from database
                 post.remove();
                 //deleting comment of all that post

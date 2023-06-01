@@ -17,6 +17,10 @@ router.use('/posts',require('./post'));
 //to go to comment router for further routing
 router.use('/comments',require('./comments'));
 
+router.use('/likes',require('./likes'));
+
+router.use("/auth" , require("./auth"));
+
 router.use('/api',require('./api/index'));
 
 module.exports=router;

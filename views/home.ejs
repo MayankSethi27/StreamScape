@@ -33,6 +33,20 @@
                     <small>
                        <%=i.user.Name%>
                    </small>
+                    <!-- CHANGE :: display the likes of this post, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+        <br>
+        <!-- study about the data attribute -->
+    <small>
+        <% if (locals.user){ %>
+            <a class="toggle-like-button" data-likes="<%=i.likes.length %>" href="/likes/toggle/?id=<%=i.id%>&type=Post">
+                    <%= i.likes.length %> Likes
+            </a>
+        <% }else{ %>
+            <%= i.likes.length %> Likes
+        <% } %>
+    </small>
+                    
+
                 </p>
                 <div class="post-comments">
                    <%if(locals.user){%>
@@ -45,7 +59,7 @@
                        <input type="submit" value="Add Comment">
                    </form>
                    <%}%>
-                
+               
                    <div id="post-comments-lists">
                        <ul id="post-comments-<%=i._id%>">
                            <!-- i.comments is loop inside comments of posts(in which p represents that object) -->
@@ -65,11 +79,23 @@
                                     <small>
                                         <%=p.user.Name%>
                                     </small>
+                                    <!-- CHANGE :: display the likes of this comment, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+            <!-- study about the data attribute -->
+            <small>
+                <% if (locals.user){ %>
+                    <a class="toggle-like-button" data-likes="<%= p.likes.length %>" href="/likes/toggle/?id=<%=p._id%>&type=Comment">
+                            <%= p.likes.length %> Likes
+                    </a>
+                <% }else{ %>
+                    <%= p.likes.length %> Likes
+                <% } %>
+            </small>
                                 </p>
+                              
                             </li>              
-                
+                            
                            <%}%>
-                
+                           
                        </ul>
                    </div>
                 </div>
@@ -78,6 +104,8 @@
             <%}%>
         </ul>
         </div>
+
+        
     </section>
     
     <!-- displaying users friends -->
@@ -91,7 +119,16 @@
         </p>
         <%}%>
     </section>
-
+    <%- include('chat_box');%>
 </div>
 <script src="/js/home_comment.js"></script>
 <script src="/js/home_post.js"></script>
+
+<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+<script src="js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>

@@ -1,18 +1,21 @@
 const User=require('../schema/user_schema');
 const path=require('path');
-const fs=require('fs')
+const fs=require('fs');
+
 
 //render the user profile page
 module.exports.profile=function(req,res){
+
     User.findById(req.params.id,function(err,user){
         return res.render('user_profile',{
             title:' User profile',
-            profile_user:user
+            profile_user:user,
+            
         });
     })
-   
 }
 
+   
 //render the SignUp page
 module.exports.signUp=function(req,res){
     //if user is authenticated(means signed in) then canot ascess signup page and redirect to profile page
@@ -142,9 +145,10 @@ module.exports.update=async function(req,res){
                         // deleting the avatar
                         //user.avatar is avatar field in user_schema containing the file path
                         fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    
+                        }
                         // this is saving path of the uploaded file into the avatar field in the user
                         user.avatar = User.avatarPath + '/' + req.file.filename;
-                        }
                     }
                         
                     user.save();

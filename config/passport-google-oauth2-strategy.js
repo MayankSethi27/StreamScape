@@ -24,7 +24,7 @@ function(accessToken,refreshToken,profile,done){
         }else{
             //if not found, create the user and set it as req.user
             User.create({
-                name:profile.displayName,
+                Name:profile.displayName,
                 email:profile.emails[0].value,
                 //crypto is used to create an random password for user sigIn through OAUTH
                 //randomBytes(20) means length of password is 20

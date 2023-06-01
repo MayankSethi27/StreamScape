@@ -18,6 +18,7 @@ const flash=require('connect-flash');
 //require flash middleware
 const customMware=require('./config/middleware');
 
+
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'assets')));
