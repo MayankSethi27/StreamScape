@@ -19,6 +19,7 @@ module.exports.home=async function(req,res){
     //         return;
     //     }
     //     else{
+        //finding all users
     //         User.find({},function(err,users){
     //             console.log('Posts Fetched Sucessfully');
     //             return res.render('home',{

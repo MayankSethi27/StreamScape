@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
- const db=mongoose.connect('mongodb+srv://mayank:mayank27@cluster0.yx0w0d3.mongodb.net/?retryWrites=true&w=majority')
+const env=require('./environment');
+ const db=mongoose.connect(env.db)
 .then(()=>{
     console.log('database connected sucessfully');
 })

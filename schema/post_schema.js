@@ -33,3 +33,9 @@ const postSchema=new mongoose.Schema({
 const Post=mongoose.model('Post',postSchema);
 
 module.exports=Post;
+
+
+
+
+//by specifying ref: 'User', you are establishing a reference to the 'User' schema 
+//By providing the ref: 'User' option, Mongoose understands that the user field should contain references to documents in the 'User' collection. This enables you to populate the user field with actual user data when querying the schema that contains this code

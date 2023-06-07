@@ -1,4 +1,5 @@
 const express=require('express');
+const env=require('./config/environment');
 const app=express();
 const port=8000;
 const path=require('path');
@@ -17,6 +18,13 @@ const MongoStore=require('connect-mongo');
 const flash=require('connect-flash');
 //require flash middleware
 const customMware=require('./config/middleware');
+
+//setup the chat server to be used with server.io
+const chatServer=require('http').Server(app);
+const chatSockets=require('../codeial/config/chat_sockets').chatSockets(chatServer);
+//port for chat_socket(observer) server
+chatServer.listen(5001);
+console.log('chat server is listining on port 5001');
 
 
 app.use(express.urlencoded());
@@ -41,7 +49,7 @@ app.use(session({
      //name of cookie
     name:'codeial',
     //This is the secret key used to encrypt the session identifier (cookie). 
-    secret:'blahsomething',
+    secret:env.session_cookie_key,
     //it is used for when user has not logIn(session not initialize) so there is no requirement to put extra info a cookie ,so we set it to false
     saveUninitialized:false,
     //when idendity is stabilish or some user info(session data) is stabilish ,do i want to rewrite it when there is no update.so we set it to false

@@ -5,12 +5,13 @@ const JWTStrategy=require('passport-jwt').Strategy;
 const ExtractJWT= require('passport-jwt').ExtractJwt;
 
 const User=require('../schema/user_schema');
+const env=require('./environment');
 
 let opts={
     //It specifies that the JWT should be extracted from the authorization header as a Bearer token
     jwtFromRequest:ExtractJWT.fromAuthHeaderAsBearerToken(),
    //secret key that is required to verify the signature of a JSON Web Token (JWT) during the authentication process.
-    secretOrKey:'codeial'
+    secretOrKey:env.jwt_secret
 }
 //---> authentication after generating jwt
 //jwtPayLoad contains user info
