@@ -62,7 +62,7 @@ app.use(session({
     //so that we do not need to logIn again when server restarts
     store: MongoStore.create({
         //session to intract with mongoose
-        mongoUrl: 'mongodb+srv://mayank:mayank27@cluster0.yx0w0d3.mongodb.net/?retryWrites=true&w=majority',
+        mongoUrl: env.db,
         // mongooseConnection:db,
         //do i want to remove automatically is disabled
         autoRemove:'disable'
