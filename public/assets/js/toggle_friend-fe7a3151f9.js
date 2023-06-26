@@ -1,0 +1,1 @@
+console.log("toggle 123"),$(document).ready((function(){$(".toggle-friend-btn").click((function(e){e.preventDefault(),console.log("prevented");var o=$(this);$.ajax({type:"GET",url:o.attr("href"),success:function(e){console.log(e.deleted),e.deleted?o.html("Add Friend"):o.html("Remove Friend"),window.location.href="/"},error:function(e){console.log(e.responseText)}})}))}));
