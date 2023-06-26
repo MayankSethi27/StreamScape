@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const env=require('./environment');
- const db=mongoose.connect(env.db)
+ const db=mongoose.connect(process.env.db)
 .then(()=>{
     console.log('database connected sucessfully');
 })
