@@ -4,16 +4,24 @@ const fs=require('fs');
 
 
 //render the user profile page
-module.exports.profile=function(req,res){
+module.exports.profile=async function(req,res){
+try{
+    let user = await User.findById(req.params.id);
 
-    User.findById(req.params.id,function(err,user){
+    let populated_user = await User.findById(req.user).populate('friends');
+    console.log(populated_user,'99999');
+    console.log(user,'11111');
         return res.render('user_profile',{
             title:' User profile',
             profile_user:user,
-            
+            populated_user
         });
-    })
+}catch(err){
+    console.log('error in user_profile',err);
+    return;
 }
+}
+
 
    
 //render the SignUp page

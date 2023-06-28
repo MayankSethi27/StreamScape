@@ -50,8 +50,7 @@ module.exports.togglelike=async function(req,res){
     }
     catch(err){
         console.log('error',err);
-        return res.json(500,{
-            message:'Request Unauthorized'
-        });
+        returnres.status(500).json('Request Unauthorized');
+
     }
 }

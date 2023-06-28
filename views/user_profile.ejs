@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/user_profile.css">
+<link rel="stylesheet" type="text/css" href="/public/assets<%= assetPath('css/user_profile.css')%>">
 
 <img src="<%=user.avatar%>" alt="<%=user.Name%>" width="100">
 
@@ -20,3 +20,29 @@
 
 <%}%>
 
+<div class="btn-grp">
+    <% let isFriend = false %>
+    <% for(let friend of populated_user.friends){ %>
+     
+      <% if(friend.to_user == profile_user.id || friend.from_user == profile_user.id){ %>
+        <% isFriend = true %>
+      <% } %>
+    <% } %>
+
+    <% if(isFriend){%>
+      <button class="btn save-btn">
+        <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+          Remove Friend
+        </a>
+      </button>
+    <% }else{%>
+      <button class="btn save-btn">
+        <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+          Add Friend
+        </a>
+      </button>
+    <% } %>
+
+  </div>
+
+  <script src="/public/assets<%= assetPath('js/toggle_friend.js') %>"></script>

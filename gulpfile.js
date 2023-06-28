@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-// const sass = require('gulp-sass')(require('sass'));
+//const sass = require('gulp-sass')(require('sass'));
 //will compress css file
 const cssnano = require('gulp-cssnano');
 //used in Gulp tasks to append a unique hash to the filenames of static assets such as CSS, JavaScript, and image files.
@@ -59,12 +59,14 @@ gulp.task('images', function(done){
 
 
 // empty the public/assets directory
+//Whenever server will restart all old work done by gulp will be deleted and it will perform all the tasks and minificatin again
 gulp.task('clean:assets', function(done){
    
     done();
 });
 
 // Call the tasks in series
+//Run all the taks one by one 
 gulp.task('build', gulp.series('clean:assets', 'css', 'js', 'images'), function(done){
     console.log('Building assets');
     done();

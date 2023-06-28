@@ -6,7 +6,7 @@ module.exports=(app)=>{
     app.locals.assetPath=function(filePath){
         console.log(filePath);
         console.log('/'+ JSON.parse(fs.readFileSync(path.join(__dirname,'../public/assets/rev-manifest.json')))[filePath],'hdjydh');
-        if(env.name==''){
+        if(env.name=='development'){
            return filePath
         }
         else{

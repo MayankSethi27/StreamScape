@@ -30,9 +30,12 @@ module.exports.addFriend = async function(req , res){
             to_user : req.query.id,
             from_user : req.user._id
         });
-
+if(toUser.id==fromUser.id){
+        toUser.friends.push(friendship);
+}else{
         toUser.friends.push(friendship);
         fromUser.friends.push(friendship);
+}
         toUser.save();
         fromUser.save();
         console.log('friendship created');

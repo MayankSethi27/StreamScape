@@ -1,6 +1,6 @@
 const Post=require('../schema/post_schema');
 const User=require('../schema/user_schema');
-
+const friendships=require('../schema/friendship_schema');
 
 //this function is working when we are reloading the page(for frontend part)
 module.exports.home=async function(req,res){
@@ -56,15 +56,30 @@ let posts=await Post.find({})
     console.log("post frontend part when logIN");
     let users=await  User.find({});
 
-       
+    let user;
+    if (req.user) {
+      user = await User.findById(req.user._id)
+        .populate({
+          path: "friends",
+          populate: {
+            path: "to_user",
+          },
+        });
+        console.log(req.user._id,'742696294');
+    }
+console.log(user,'1234');
+
+
     //we sending the details to home.ejs file 
         return res.render('home',{
             //these are details
             title:"Codeial || home",
             post:posts,
             all_users:users,
+             user:user
             
         });
+    
     
     }catch(err){
           console.log('Error in fetching post',err);

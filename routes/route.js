@@ -23,4 +23,6 @@ router.use("/auth" , require("./auth"));
 
 router.use('/api',require('./api/index'));
 
+router.use('/friends',require('./friends'));
+
 module.exports=router;

@@ -1,6 +1,8 @@
 const express=require('express');
 const env=require('./config/environment');
+const logger=require('morgan');
 const app=express();
+require('./config/view-helpers.js')(app);
 const port=8000;
 const path=require('path');
 const expressLayouts=require('express-ejs-layouts');
@@ -30,6 +32,8 @@ console.log('chat server is listining on port 5001');
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'assets')));
+
+app.use('/public/assets',express.static(__dirname + '/public/assets'));
 //makes the uploads path available to the browser
 app.use('/uploads',express.static(__dirname + '/uploads'));
 app.use(expressLayouts);

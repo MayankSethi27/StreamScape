@@ -8,8 +8,7 @@ const chatSchema = new mongoose.Schema({
     },
     user:{
         //getting user id from another schema 'User'
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
+        type:String,
         required:true
     },
 },{
