@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="/public/assets<%= assetPath('css/home.css') %>">
 
+
 <div id="home-container">
+    <%if(locals.user){%>
     <section id="feed-posts">
-        <h4>Posts</h4>
+        <h3>POSTS</h3>
         <%if(locals.user){%>
             <!-- form to create post -->
         <form action="/posts/create" id="new-post-form" method="post">
@@ -107,21 +109,23 @@
 
         
     </section>
-    
+    <%}%>
+    <%if(locals.user){%>
     <!-- displaying users friends -->
     <section id="user-friends">
-        <h4>Friends</h4>
+        <h4>FRIENDS</h4>
         <!-- this 'all_users' name we get from home_controller.js' -->
          <!-- we cannot use original user_Schema name in ejs part so we write it in new key -->
         <%for(u of all_users){%>
         <p>
+            <img src="<%=u.avatar%>" alt="<%=u.Name%>" class="image">
             <a href="/user/profile/<%=u.id%>"><%=u.Name%></a>
         </p>
         <%}%>
     </section>
-    <%if(locals.user){%>
+    
 <section id="followers">
-       <h4>Followers</h4>
+       <h4>FOLLOWERS</h4>
        <%for(f of user.friends){%>
         <p>
         <%=f.to_user.Name%>

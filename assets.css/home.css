@@ -1,1 +1,1 @@
-#home-container{display:flex}#feed-posts{width:70%;padding:10px}#user-friends{width:30%;padding:10px;border-left:1px solid #d3d3d3;height:auto}
+#home-container{display:flex;background : linear-gradient(90deg, #7b4e66, #207e79);}#feed-posts{width:70%;padding:10px}#user-friends{width:30%;padding:10px;border-left:1px solid #d3d3d3;height:auto}

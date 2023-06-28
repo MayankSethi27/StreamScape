@@ -1,5 +1,6 @@
 #home-container{
     display: flex;
+    background : linear-gradient(90deg, #7b4e66, #207e79);
     
 }
 #feed-posts{
