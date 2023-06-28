@@ -19,8 +19,8 @@ module.exports.addFriend = async function(req , res){
     if(existingFriendship){
         toUser.friends.pull(existingFriendship._id);
         fromUser.friends.pull(existingFriendship._id);
-        toUser.save();
-        fromUser.save();
+        await toUser.save();
+        await fromUser.save();
         existingFriendship.remove();
         deleted = true;
         removeFriend = true;
