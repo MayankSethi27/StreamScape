@@ -117,7 +117,7 @@
         <!-- this 'all_users' name we get from home_controller.js' -->
          <!-- we cannot use original user_Schema name in ejs part so we write it in new key -->
         <%for(u of all_users){%>
-        <p>
+        <p class="image-container">
             <img src="<%=u.avatar%>" alt="<%=u.Name%>" class="image">
             <a href="/user/profile/<%=u.id%>"><%=u.Name%></a>
         </p>
@@ -127,7 +127,8 @@
 <section id="followers">
        <h4>FOLLOWERS</h4>
        <%for(f of user.friends){%>
-        <p>
+        <p class="image-container">
+        <img src="<%=f.to_user.avatar%>" alt="<%=f.to_user.Name%>" class="image">
         <%=f.to_user.Name%>
     </p>
         <%}%>

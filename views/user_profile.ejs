@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/public/assets<%= assetPath('css/user_profile.css')%>">
 
-<img src="<%=user.avatar%>" alt="<%=user.Name%>" class="circle-image">
+<img src="<%=profile_user.avatar%>" alt="<%=profile_user.Name%>" class="circle-image">
 
 <!-- form to update user_profile -->
 <%if(user.id==profile_user.id){%>
@@ -31,14 +31,14 @@
 
     <% if(isFriend){%>
       <button class="btn save-btn">
-        <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
-          Remove Friend
+        <a style="color:black;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+          Add Friend
         </a>
       </button>
     <% }else{%>
       <button class="btn save-btn">
-        <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
-          Add Friend
+        <a style="color:black;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+          Remove Friend
         </a>
       </button>
     <% } %>
