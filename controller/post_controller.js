@@ -1,6 +1,9 @@
 const Post=require('../schema/post_schema');
 const Comment=require('../schema/comment_schema');
 const Like=require('../schema/like_schema');
+const PostMailer=require("../controller/mailers/comments_mailers");
+const queue=require('../config/kue');
+const postEmailWorker=require('../workers/post_email_worker');
 
 //function to create post in database
 module.exports.create= async function(req,res){
@@ -12,6 +15,18 @@ module.exports.create= async function(req,res){
     user:req.user._id
     //comments:this will be empty now but when we create commrnt we will push it from comment_controller
    });
+   await post.populate('user');
+    //creating job means sending the comments to the 'email' queue
+    let job=queue.create('emails',post).save(function(err){
+        if(err){
+            console.log('Error in sending to the queue',err);
+            return;
+        }
+        else{
+            console.log('job enqueued',job.id);
+        }
+    })
+       
 // check if type of request is for AJAX(which is XMLHttp request)
    if(req.xhr){
     //populating user bcz to show user name on frontend part as it contains only user_id(for AJAX part)
