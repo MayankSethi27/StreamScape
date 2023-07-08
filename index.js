@@ -3,7 +3,7 @@ const env=require('./config/environment');
 const logger=require('morgan');
 const app=express();
 require('./config/view-helpers.js')(app);
-const port=8000;
+const port=5959;
 const path=require('path');
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
