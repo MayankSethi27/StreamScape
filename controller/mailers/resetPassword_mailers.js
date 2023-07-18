@@ -8,7 +8,7 @@ module.exports.resetPassword = function(accessToken){
     nodeMailer.transporter.sendMail({
         from: 'mayanksethi324@gmail.com', // sender address
         to: accessToken.user.email, // list of receivers
-        subject: "Codeial : Reset Password", // Subject line
+        subject: "StreamScape : Reset Password", // Subject line
         html: htmlString // html body
       } , function(error , info){
           if(error){console.log("Error in sending mail",error);return;}

@@ -17,7 +17,7 @@ module.exports.chatSockets=function(socketServer){
 
         //if request received then socket will join that chatroom
         // ---> this function will add subscriber to chatroom
-        //if chatroom with name 'codeial' is already exists then user will entered and
+        //if chatroom with name 'StreamScape' is already exists then user will entered and
         // if not exist then socket will create new and user will be entered 
         socket.join(data.chatroom);
 

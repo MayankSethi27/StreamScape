@@ -23,7 +23,7 @@ module.exports.home=async function(req,res){
     //         User.find({},function(err,users){
     //             console.log('Posts Fetched Sucessfully');
     //             return res.render('home',{
-    //                 title:"Codeial || home",
+    //                 title:"StreamScape || home",
     //                 post:posts,
     //                 all_users:users
     //             });
@@ -32,7 +32,7 @@ module.exports.home=async function(req,res){
     //     }
     // });
     
-    //finding post and user when reloading page(or opening codeial for first time during logIn)
+    //finding post and user when reloading page(or opening StreamScape for first time during logIn)
 try{
 let posts=await Post.find({})
 
@@ -73,7 +73,7 @@ console.log(user,'1234');
     //we sending the details to home.ejs file 
         return res.render('home',{
             //these are details
-            title:"Codeial || home",
+            title:"StreamScape || home",
             post:posts,
             all_users:users,
              user:user

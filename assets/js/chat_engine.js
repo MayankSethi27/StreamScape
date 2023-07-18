@@ -24,13 +24,13 @@ class ChatEngine{
             console.log('connection estabilished using sockets..!');
         
         
-        //user sending request to join room named codeial and sending some data    
+        //user sending request to join room named StreamScape and sending some data    
         self.socket.emit('join_room',{
             user_email:self.userEmail,
-            chatroom:'codeial'
+            chatroom:'StreamScape'
         });
 
-        //receives request when an user joined the chatroom named 'codeial' by detecting 'user_joined" event
+        //receives request when an user joined the chatroom named 'StreamScape' by detecting 'user_joined" event
         self.socket.on('user_joined',function(data){
             console.log('a user joined',data);
         });
@@ -44,7 +44,7 @@ class ChatEngine{
                 self.socket.emit('send_message', {
                     message: msg,
                     user_email: self.userEmail,
-                    chatroom: 'codeial'
+                    chatroom: 'StreamScape'
                 });
             }
         });

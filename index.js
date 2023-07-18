@@ -23,7 +23,7 @@ const customMware=require('./config/middleware');
 
 //setup the chat server to be used with server.io
 const chatServer=require('http').Server(app);
-const chatSockets=require('../codeial/config/chat_sockets').chatSockets(chatServer);
+const chatSockets=require('../StreamScape/config/chat_sockets').chatSockets(chatServer);
 //port for chat_socket(observer) server
 chatServer.listen(5001);
 console.log('chat server is listining on port 5001');
@@ -51,7 +51,7 @@ app.set('views',path.join(__dirname,'views'));
 //MongoStore is used to setup the cookie in the db
 app.use(session({
      //name of cookie
-    name:'codeial',
+    name:'StreamScape',
     //This is the secret key used to encrypt the session identifier (cookie). 
     secret:env.session_cookie_key,
     //it is used for when user has not logIn(session not initialize) so there is no requirement to put extra info a cookie ,so we set it to false

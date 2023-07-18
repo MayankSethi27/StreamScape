@@ -7,7 +7,7 @@ const ejs=require('ejs');
 module.exports.auth = function(request , response){
 
     return response.render('verify_email' , {
-        title: "Codeial | Verify",
+        title: "StreamScape | Verify",
     });
 }
 
@@ -29,7 +29,7 @@ module.exports.verifyEmail = async function(request , response){
         resetPasswordMailer.resetPassword(accessToken);
 
         return response.render('account_verified' , {
-            title: "Codeial | Account Verified",
+            title: "StreamScape | Account Verified",
         });
     }else{
         request.flash("error", "Account does not exist with this email");
@@ -44,7 +44,7 @@ module.exports.resetPassword = async function(request , response){
     if(accessToken){
         if(accessToken.isValid){
             return response.render('reset_password' , {
-                title : 'Codeial | Reset Password',
+                title : 'StreamScape | Reset Password',
                 accessToken : accessToken.token
             })
         }
