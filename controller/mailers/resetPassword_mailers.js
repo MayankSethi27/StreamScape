@@ -6,7 +6,7 @@ module.exports.resetPassword = function(accessToken){
     let htmlString = nodeMailer.renderTemplate({accessToken:accessToken} , "/resetPassword/reset_password.ejs");
 
     nodeMailer.transporter.sendMail({
-        from: 'mayanksethi1001@gmail.com', // sender address
+        from: 'mayanksethi324@gmail.com', // sender address
         to: accessToken.user.email, // list of receivers
         subject: "Codeial : Reset Password", // Subject line
         html: htmlString // html body
