@@ -8,7 +8,7 @@ const development={
         port:587,
         secure:'false',
         auth:{
-            user:'mayanksethi324@gmail.com',
+            user:'mayanksethi1001@gmail.com',
             pass:'pfbfdwmgctiosief'
         }
     },
