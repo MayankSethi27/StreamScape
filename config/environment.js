@@ -1,7 +1,7 @@
 const development={
     name:'development',
     session_cookie_key:'blahsomething',
-    db:'mongodb+srv://mayank:mayank27@cluster0.yx0w0d3.mongodb.net/?retryWrites=true&w=majority',
+    db:'mongodb+srv://mishragaurav656:Hello@1234@clustertrying.0l68qp5.mongodb.net/?retryWrites=true&w=majority',
     smtp:{
         service:'gmail',
         host:"smtp.gmail.com",
