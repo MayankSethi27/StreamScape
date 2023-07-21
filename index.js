@@ -29,7 +29,7 @@ chatServer.listen(5001);
 console.log('chat server is listining on port 5001');
 
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'assets')));
 
