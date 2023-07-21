@@ -23,7 +23,7 @@ const customMware=require('./config/middleware');
 
 //setup the chat server to be used with server.io
 const chatServer=require('http').Server(app);
-const chatSockets=require('../StreamScape/config/chat_sockets').chatSockets(chatServer);
+const chatSockets=require('../streamscape/config/chat_sockets').chatSockets(chatServer);
 //port for chat_socket(observer) server
 chatServer.listen(5001);
 console.log('chat server is listining on port 5001');

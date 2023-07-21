@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/public/assets<%= assetPath('css/user_profile.css')%>">
+<link rel="stylesheet" type="text/css" href="/css/user_profile.css">
 
 <img src="<%=profile_user.avatar%>" alt="<%=profile_user.Name%>" class="circle-image">
 
@@ -15,12 +15,12 @@
 
 <%}else{%>
 <!-- else only show profile info -->
-    <p><%=profile_user.Name%></p>
-    <p><%=profile_user.email%></p>
+    <p style="margin-left: 10px;"><%=profile_user.Name%></p>
+    <p style="margin-left: 10px;"><%=profile_user.email%></p>
 
 <%}%>
 
-<div class="btn-grp">
+<div class="btn-grp" style="margin-left: 10px;">
     <% let isFriend = false %>
     <% for(let friend of populated_user.friends){ %>
      
@@ -32,17 +32,17 @@
     <% if(isFriend){%>
       <button class="btn save-btn">
         <a style="color:black;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
-          Add Friend
+          Remove Friend
         </a>
       </button>
     <% }else{%>
       <button class="btn save-btn">
         <a style="color:black;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
-          Remove Friend
+          Add Friend
         </a>
       </button>
     <% } %>
 
   </div>
 
-  <script src="/public/assets<%= assetPath('js/toggle_friend.js') %>"></script>
+  <script src="/js/toggle_friend.js"></script>

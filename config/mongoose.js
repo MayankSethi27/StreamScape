@@ -1,9 +1,7 @@
 const mongoose=require('mongoose');
 const env=require('./environment');
-console.log(env.db);
- const db=mongoose.connect(env.db,{useNewUrlParser: true,
-    useUnifiedTopology: true,
-    ssl: false} )
+
+ const db=mongoose.connect(env.db)
 .then(()=>{
     console.log('database connected sucessfully');
 })

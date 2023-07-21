@@ -1,3 +1,15 @@
 body{
-    background-color: blueviolet;
+    background : linear-gradient(90deg, #988689, #076d8d)
+    
+}
+.circle-image{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%; 
+    object-fit: cover;
+    margin-left: 10px;
+}
+.btn-group{
+    margin-left: "10px";
+    
 }

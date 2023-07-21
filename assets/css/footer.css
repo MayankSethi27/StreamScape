@@ -1,10 +1,10 @@
 #layout-footer{
     color: white;
-    background: grey;
+    background-color:#3f718a ;
     padding: 5px 10px;
     display: flex;
     justify-content: flex-start;
-    margin-top: 10%;
+    
 
 }
 .home-link{

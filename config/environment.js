@@ -1,7 +1,7 @@
 const development={
     name:'development',
     session_cookie_key:'blahsomething',
-    db:'mongodb+srv://mishragaurav656:Hello1234@clustertrying.0l68qp5.mongodb.net/?retryWrites=true&w=majority',
+    db:'mongodb+srv://mayank:mayank27@cluster0.yx0w0d3.mongodb.net/?retryWrites=true&w=majority',
     smtp:{
         service:'gmail',
         host:"smtp.gmail.com",
@@ -14,7 +14,7 @@ const development={
     },
     google_client_id:"321224408392-h8t13s8ngu39pe1b5qp30pnotrqeg6d9.apps.googleusercontent.com",
     google_client_secret:"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",
-    google_callback_url:"http://localhost:8000/user/auth/google/callback",
+    google_callback_url:"http://localhost:5959/user/auth/google/callback",
     jwt_secret:'StreamScape'
 }
 

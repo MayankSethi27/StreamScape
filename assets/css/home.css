@@ -1,7 +1,7 @@
 #home-container{
     display: flex;
-    background : linear-gradient(90deg, #7b4e66, #207e79);
-    
+    background : linear-gradient(90deg, #731c71, #7358ad);
+    height: 100%;  
 }
 #feed-posts{
     width: 70%;
@@ -13,4 +13,22 @@
     padding: 10px;
     border-left: 1px solid lightgrey;
     height: auto;
+}
+.image{
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+    border-radius: 50%; 
+    object-fit: cover;
+}
+.image-container {
+    display: flex;
+    align-items: center;
+    
+}
+#followers{
+    border-left: 1px solid lightgrey;
+    height: auto;
+    padding-left: 10px;
+    width: 30%;
 }
