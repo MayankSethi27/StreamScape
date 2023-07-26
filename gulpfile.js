@@ -1,16 +1,14 @@
 const gulp = require('gulp');
-//used to minify css file
 const cssnano = require('cssnano');
-//used in Gulp tasks to append a unique hash to the filenames of static assets such as CSS, JavaScript, and image files.
 const rev = require('gulp-rev');
 const uglify = require('gulp-uglify-es').default;
 const imagemin = require('gulp-imagemin');
 
 // Task for minimizing CSS files
-gulp.task('css', function(done) {
+gulp.task('css', function() {
   console.log('minifying css...');
 
-  gulp.src('./assets/css/**/*.css')
+  return gulp.src('./assets/css/**/*.css')
     .pipe(cssnano())
     .pipe(gulp.dest('./assets'))
     .pipe(rev())
@@ -21,14 +19,13 @@ gulp.task('css', function(done) {
     }))
     .pipe(gulp.dest('./public/assets'));
 
-  done();
 });
 
 // Task for minimizing JS files
-gulp.task('js', function(done) {
+gulp.task('js', function() {
   console.log('minifying js...');
 
-  gulp.src('./assets/**/*.js')
+  return gulp.src('./assets/**/*.js')
     .pipe(uglify())
     .pipe(rev())
     .pipe(gulp.dest('./public/assets/js'))
@@ -38,14 +35,13 @@ gulp.task('js', function(done) {
     }))
     .pipe(gulp.dest('./public/assets'));
 
-  done();
 });
 
 // Task for compressing images
-gulp.task('images', function(done) {
+gulp.task('images', function() {
   console.log('compressing images...');
 
-  gulp.src('./assets/**/*.+(png|jpg|gif|svg|jpeg)')
+  return gulp.src('./assets/**/*.+(png|jpg|gif|svg|jpeg)')
     .pipe(imagemin())
     .pipe(rev())
     .pipe(gulp.dest('./public/assets/images'))
@@ -55,7 +51,6 @@ gulp.task('images', function(done) {
     }))
     .pipe(gulp.dest('./public/assets'));
 
-  done();
 });
 
 // Empty the public/assets directory
