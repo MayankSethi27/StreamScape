@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 //const sass = require('gulp-sass')(require('sass'));
 //will compress css file
-const cssnano = require('gulp-cssnano');
 //used in Gulp tasks to append a unique hash to the filenames of static assets such as CSS, JavaScript, and image files.
 const rev = require('gulp-rev');
 const uglify = require('gulp-uglify-es').default;
