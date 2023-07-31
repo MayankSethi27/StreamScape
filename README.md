@@ -42,7 +42,7 @@ Make sure you have the following software installed on your machine:
 
    ```env
    PORT=3000
-   MONGODB_URI=mongodb://localhost:27017/streamscape
+   MONGODB_URI=mongodb:YOUR_URI
    SESSION_SECRET=your_session_secret
    ```
 
