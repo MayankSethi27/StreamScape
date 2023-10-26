@@ -7,7 +7,7 @@ class ChatEngine{
         
         //sending the connection request to the observer(server)
         //'connect' event is fired when new connection is fired
-        this.socket=io.connect('http://localhost:5001/');
+        this.socket=io.connect('http://13.235.245.124/');
         
         //if userEmail exists then connectionHandler is called to detect the connection
         if(this.userEmail){
